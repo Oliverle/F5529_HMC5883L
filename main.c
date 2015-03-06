@@ -50,7 +50,6 @@ int mx = 0, my = 0, mz = 0;		// Dados do magnometro
  * main.c
  */
 int main(void) {
-	//unsigned int i = 0;
 
 	initPorts();
     disableWatchDog();

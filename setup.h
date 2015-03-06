@@ -17,7 +17,7 @@
 
 #define F_CPU 25000000L   // Frequencia da CPU: 25 MHz
 #define BAUD_RATE 9600	  // Baud Rate do UART: 9600
-#define I2C_FREQ 100000L  // Frequencia do I2C: 200 kHz
+#define I2C_FREQ 400000L  // Frequencia do I2C: 400 kHz
 
 /*
  * Definições para controle do clock
