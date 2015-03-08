@@ -13,19 +13,6 @@
 #include "../twi_master.h"
 
 /*
- * Configuração
- */
-void hmc5883l_config(void) {
-	uint8_t data_a[] = { HMC5883L_AVG_8 | HMC5883L_HZ_15 | HMC5883L_MS_NORMAL };
-	uint8_t data_b[] = { HMC5883L_GAIN_1_33 };
-	uint8_t data_mode[] = { HMC5883L_REG_MODE, HMC5883L_MD_CONTINUOUS };
-
-	twi_master_writeRegister(HMC5883L_ADDR, HMC5883L_REG_CONFIG_A, data_a, sizeof(data_a));
-	twi_master_writeRegister(HMC5883L_ADDR, HMC5883L_REG_CONFIG_B, data_b, sizeof(data_b));
-	twi_master_writeRegister(HMC5883L_ADDR, HMC5883L_REG_MODE, data_mode, sizeof(data_mode));
-}
-
-/*
  * Detectar se estah no barramento
  */
 uint8_t hmc5883l_detect(void) {
@@ -33,6 +20,19 @@ uint8_t hmc5883l_detect(void) {
 	twi_master_readRegister(HMC5883L_ADDR, HMC5883L_REG_ID_A, hmlc5883_RxBuffer, sizeof(hmlc5883_RxBuffer));
 
 	return (hmlc5883_RxBuffer[0] == 'H' && hmlc5883_RxBuffer[1] == '4' && hmlc5883_RxBuffer[2] == '3');
+}
+
+/*
+ * Configuração
+ */
+void hmc5883l_config(void) {
+	uint8_t data_a[] = { HMC5883L_AVG_8 | HMC5883L_HZ_15 | HMC5883L_MS_NORMAL };
+	uint8_t data_b[] = { HMC5883L_GAIN_1_33 };
+	uint8_t data_mode[] = { HMC5883L_MD_CONTINUOUS };
+
+	twi_master_writeRegister(HMC5883L_ADDR, HMC5883L_REG_CONFIG_A, data_a, sizeof(data_a));
+	twi_master_writeRegister(HMC5883L_ADDR, HMC5883L_REG_CONFIG_B, data_b, sizeof(data_b));
+	twi_master_writeRegister(HMC5883L_ADDR, HMC5883L_REG_MODE, data_mode, sizeof(data_mode));
 }
 
 /*

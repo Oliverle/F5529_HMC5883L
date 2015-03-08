@@ -168,7 +168,6 @@ void setupUart() {
  */
 void setupI2C() {
 	P3SEL |= (BIT0 + BIT1);                 // Assign I2C pins to USCI_B0 (P3.0 -> SDA / P3.1 -> SCL)
-	//P3REN |= (BIT0 + BIT1);
 
 	UCB0CTL1 |= UCSWRST;                     // Enable SW reset
 

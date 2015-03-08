@@ -46,6 +46,7 @@ volatile uint8_t readMag = 0;	// Informa se deve ser realizado a leitura do magn
 uint8_t magEnabled = 0;			// Informa que o magnometro estah habilitado
 int mx = 0, my = 0, mz = 0;		// Dados do magnometro
 
+
 /*
  * main.c
  */
@@ -63,14 +64,22 @@ int main(void) {
     while (1) {
 
     	uint8_t enable = hmc5883l_detect();
+    	hmc5883l_read_data(&mx,&my,&mz);
     	if (enable) {
+    		if (magEnabled == 0) {
+    			hmc5883l_config();
+    			magEnabled = 1;
+    		}
     		uart_printf("HMC5883L Habilitado\r\n");
+    		uart_printf("x = %i; y = %i; z = %i\r\n", mx, my, mz);
     	}
     	else {
     		uart_printf("HMC5883L Desabilitado\r\n");
+    		if (magEnabled)
+    			magEnabled = 0;
     	}
 
-    	delay(1000);
+    	delay(500);
 
     	counter++;
 
