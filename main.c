@@ -64,12 +64,12 @@ int main(void) {
     while (1) {
 
     	uint8_t enable = hmc5883l_detect();
-    	hmc5883l_read_data(&mx,&my,&mz);
     	if (enable) {
     		if (magEnabled == 0) {
     			hmc5883l_config();
     			magEnabled = 1;
     		}
+    		hmc5883l_read_data(&mx,&my,&mz);
     		uart_printf("HMC5883L Habilitado\r\n");
     		uart_printf("x = %i; y = %i; z = %i\r\n", mx, my, mz);
     	}
